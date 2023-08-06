@@ -5,7 +5,7 @@ Este programa es una Aplicación Win UI 3 (windows 10 1809 en adelante) que emul
 
 [<img src="EmuBal.png">](https://geltec.com.com/EmuBal),
 
-Cuando se ejecuta la misma, se debe seleccionar el puerto serie y la frecuencia de envío de inormación por el puerto serie. 
+Cuando se ejecuta la misma, se debe seleccionar el puerto serie y la frecuencia de envío de información, es decir, la cantidad de veces por segundo que se envía la linea de texto con el  peso simulado del vehícul, junto con los flags de estado seleccionados.
 
 ### Las especificaciones de lo que manda la balanza.
 
@@ -31,12 +31,15 @@ Los equipos se entregan programados en forma standard con los siguientes paráme
  
 Se envía constantemente un string de ocho caracteres con el siguiente formato:           
  
-** “S P P P P P P CR” **
+    S P P P P P P CR
  
 Donde: 
-  S  = BYTE DE STATUS;
-  P  = PESO EN ASCII;
-  CR = RETORNO CARRO (Odh)
+
+    S  = BYTE DE STATUS
+    P  = PESO EN ASCII
+    CR = RETORNO CARRO (Odh)
+
+El Byte de Status se puede enviar en formato ASCII o Binario, y su siginificado es:
  
     BYTE DE ESTATUS EN BINARIO                      BYTE DE ESTATUS EN ASC II
     BIT 0:   NETO                                   @..C   : PESO POSITIVO FUERA DE EQUILIBRIO
