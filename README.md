@@ -3,6 +3,8 @@
 
 Este programa es una Aplicación Win UI 3 (windows 10 1809 en adelante) que emula el comportamiento de una balanza comercial, enviando por el puerto serie un string similar al que enviaría una balanza comercial.
 
+[<img src="EmuBal.png">](https://geltec.com.com/EmuBal),
+
 Cuando se ejecuta la misma, se debe seleccionar el puerto serie y la frecuencia de envío de inormación por el puerto serie. 
 
 ### Las especificaciones de lo que manda la balanza.

@@ -12,7 +12,7 @@
 
   <Identity
     Name="a9f53621-4b37-45ce-832e-fa240b984dd7"
-    Publisher="CN=german"
+    Publisher="CN=German Ortiz, O=German Ortiz, S=Mendoza, C=AR"
     Version="1.0.0.0" />
     
   <mp:PhoneIdentity PhoneProductId="a9f53621-4b37-45ce-832e-fa240b984dd7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
