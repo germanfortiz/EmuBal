@@ -20,19 +20,47 @@
             Text="Emulador de Balanza"/>
         <Grid Grid.Row="1">
             <StackPanel Orientation="Vertical">
-                <TextBlock
-                    Margin="20,5,5,5"
-                    Style="{StaticResource BodyTextStyle}"
-                    Text="Puertos Disponibles"/>
-                <ComboBox
-                    Margin="10,5,5,5"
-                    Name="cbPorts"
-                    Style="{StaticResource DefaultComboBoxStyle}"
-                    IsSynchronizedWithCurrentItem="False"
-                    PlaceholderText="Seleccioná alguno chabón"
-                    SelectionChanged="cbPorts_SelectionChanged"
-                    Width="250">
-                </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock
+                            Margin="20,5,5,5"
+                            Style="{StaticResource BodyTextStyle}"
+                            Text="Puertos Disponibles"/>
+                        <ComboBox
+                            Margin="10,5,5,5"
+                            Name="cbPorts"
+                            Style="{StaticResource DefaultComboBoxStyle}"
+                            IsSynchronizedWithCurrentItem="False"
+                            PlaceholderText="Seleccioná alguno chabón"
+                            SelectionChanged="cbPorts_SelectionChanged"
+                            Width="250">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock
+                            Margin="20,5,5,5"
+                            Style="{StaticResource BodyTextStyle}"
+                            Text="Seleccionar Velocidad"/>
+                        <ComboBox
+                            Margin="10,5,5,5"
+                            Name="cbSpeed"
+                            Style="{StaticResource DefaultComboBoxStyle}"
+                            IsSynchronizedWithCurrentItem="False"
+                            PlaceholderText="Seleccioná alguno chabón"
+                            SelectionChanged="cbPorts_SelectionChanged"
+                            SelectedIndex="0"
+                            Width="250">
+                            <ComboBoxItem Content="1200"/>
+                            <ComboBoxItem Content="2400"/>
+                            <ComboBoxItem Content="4800"/>
+                            <ComboBoxItem Content="9600"/>
+                            <ComboBoxItem Content="19200"/>
+                            <ComboBoxItem Content="38400"/>
+                            <ComboBoxItem Content="57600"/>
+                            <ComboBoxItem Content="115200"/>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
                 <TextBlock
                     Margin="20,15,5,5"
                     Style="{StaticResource BodyTextStyle}"

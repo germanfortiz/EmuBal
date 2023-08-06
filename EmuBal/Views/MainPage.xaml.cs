@@ -85,15 +85,28 @@ public sealed partial class MainPage : Page
             SerialPort.Close();
         }
 
-        // Allow the user to set the appropriate properties.
+        switch ((int)cbSpeed.SelectedIndex)
+        {
+            case 0:  SerialPort.BaudRate = 1200; break;
+            case 1:  SerialPort.BaudRate = 2400; break;
+            case 2:  SerialPort.BaudRate = 4800; break;
+            case 3:  SerialPort.BaudRate = 9600; break;
+            case 4:  SerialPort.BaudRate = 19200; break;
+            case 5:  SerialPort.BaudRate = 38400; break;
+            case 6:  SerialPort.BaudRate = 57600; break;
+            case 7:  SerialPort.BaudRate = 115200; break;
+            default: SerialPort.BaudRate = 1200; break;
+        }
+
+        if (cbPorts.SelectedIndex < 0)
+            return;
+
+        // Set the parameter of the serial Port.
         SerialPort.PortName = cbPorts.Items[cbPorts.SelectedIndex].ToString();
-        SerialPort.BaudRate = 1200;
         SerialPort.Parity = Parity.None;
         SerialPort.DataBits = 8;
         SerialPort.StopBits = StopBits.One;
         SerialPort.Handshake = Handshake.None;
-
-        // Set the read/write timeouts
         SerialPort.ReadTimeout = 500;
         SerialPort.WriteTimeout = 500;
 
