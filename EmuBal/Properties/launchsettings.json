@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "EmuBal (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "EmuBal (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
