@@ -37,72 +37,74 @@ namespace EmuBal.Views;
 
 public sealed partial class MainPage : Page
 {
-    private DispatcherTimer dTimer;
-    private static SerialPort SerialPort = null;
+    private DispatcherTimer? dTimer = null;
+    private static SerialPort? SerialPort = null;
 
     public MainViewModel ViewModel
     {
         get;
     }
 
+    /// <summary>
+    /// The Constructor of the Mian Page.
+    /// </summary>
     public MainPage()
     {
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
-        this.Loaded += MainPage_Loaded;
+        Loaded += MainPageLoaded;
     }
 
-    private void MainPage_Loaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void MainPageLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         dTimer = new DispatcherTimer();
-        dTimer.Tick += DTimer_Tick;
+        dTimer.Tick += DTimerTick;
 
-        this.cbPorts.Items.Clear();
+        cbPorts.Items.Clear();
 
-        if (SerialPort.GetPortNames().Count() > 0)
+        if (SerialPort.GetPortNames().Length > 0)
         {
-            this.cbPorts.PlaceholderText = "Seleccionar puerto serie";
+            cbPorts.PlaceholderText = "Seleccionar puerto serie";
             foreach (var portName in SerialPort.GetPortNames())
             {
-                this.cbPorts.Items.Add(portName);
+                cbPorts.Items.Add(portName);
             }
         }
         else
         {
-            this.cbPorts.PlaceholderText = "Che, no hay ningún puerto serie";
+            cbPorts.PlaceholderText = "Che, no hay ningún puerto serie";
         }
     }
 
-    private void cbPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void CBPortsSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (SerialPort == null)
-        {
-            SerialPort = new SerialPort();
-        }
+        SerialPort ??= new SerialPort();
 
         if (SerialPort.IsOpen)
         {
             SerialPort.Close();
         }
 
-        switch ((int)cbSpeed.SelectedIndex)
+        SerialPort.BaudRate = (int)cbSpeed.SelectedIndex switch
         {
-            case 0:  SerialPort.BaudRate = 1200; break;
-            case 1:  SerialPort.BaudRate = 2400; break;
-            case 2:  SerialPort.BaudRate = 4800; break;
-            case 3:  SerialPort.BaudRate = 9600; break;
-            case 4:  SerialPort.BaudRate = 19200; break;
-            case 5:  SerialPort.BaudRate = 38400; break;
-            case 6:  SerialPort.BaudRate = 57600; break;
-            case 7:  SerialPort.BaudRate = 115200; break;
-            default: SerialPort.BaudRate = 1200; break;
-        }
+            0 => 1200,
+            1 => 2400,
+            2 => 4800,
+            3 => 9600,
+            4 => 19200,
+            5 => 38400,
+            6 => 57600,
+            7 => 115200,
+            _ => 1200,
+        };
 
         if (cbPorts.SelectedIndex < 0)
+        {
             return;
+        }
 
         // Set the parameter of the serial Port.
-        SerialPort.PortName = cbPorts.Items[cbPorts.SelectedIndex].ToString();
+        SerialPort.PortName = cbPorts.Items[cbPorts.SelectedIndex].ToString()?? string.Empty;
         SerialPort.Parity = Parity.None;
         SerialPort.DataBits = 8;
         SerialPort.StopBits = StopBits.One;
@@ -120,33 +122,55 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private void sSampling_ValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+    private void SSamplingValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
     {
         if (dTimer == null)
+        {
             return;
+        }
+
         if (tOutput == null)
+        {
             return;
+        }
 
         if (dTimer.IsEnabled)
+        {
             dTimer.Stop();
+        }
+
         dTimer.Interval = TimeSpan.FromSeconds(1 / sSampling.Value);
         tOutput.Text = string.Empty;
         dTimer.Start();
     }
 
-    private void rbAscii_Checked(object sender, RoutedEventArgs e)
+    private void RBAsciiChecked(object sender, RoutedEventArgs e)
     {
-        if (bAsciiFormat != null) bAsciiFormat.Visibility = Visibility.Visible;
-        if (bBinaryFormat != null) bBinaryFormat.Visibility = Visibility.Collapsed;
+        if (bAsciiFormat != null)
+        {
+            bAsciiFormat.Visibility = Visibility.Visible;
+        }
+
+        if (bBinaryFormat != null)
+        {
+            bBinaryFormat.Visibility = Visibility.Collapsed;
+        }
     }
 
-    private void rbBinary_Checked(object sender, RoutedEventArgs e)
+    private void RBBinaryChecked(object sender, RoutedEventArgs e)
     {
-        if (bAsciiFormat != null) bAsciiFormat.Visibility = Visibility.Collapsed;
-        if (bBinaryFormat != null) bBinaryFormat.Visibility = Visibility.Visible;
+        if (bAsciiFormat != null)
+        {
+            bAsciiFormat.Visibility = Visibility.Collapsed;
+        }
+
+        if (bBinaryFormat != null)
+        {
+            bBinaryFormat.Visibility = Visibility.Visible;
+        }
     }
 
-    private void DTimer_Tick(object? sender, object e)
+    private void DTimerTick(object? sender, object e)
     {
         if ((SerialPort == null) || (!SerialPort.IsOpen))
         {
@@ -154,8 +178,8 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        byte[] commandToSend = new byte[8];
-        string textToShow = string.Empty;
+        var commandToSend = new byte[8];
+        string textToShow;
 
         if (rbAscii.IsChecked == true)
         {
@@ -267,15 +291,29 @@ public sealed partial class MainPage : Page
         {
             commandToSend[0] = 0;
             if (rbStatusOutOfRange.IsChecked == true)
+            {
                 commandToSend[0] |= (byte)(1 << 4);
+            }
+
             if (rbStatusNegative.IsChecked == true)
+            {
                 commandToSend[0] |= (byte)(1 << 3);
+            }
+
             if (rbStatusBalance.IsChecked == true)
+            {
                 commandToSend[0] |= (byte)(1 << 2);
+            }
+
             if (rbStatusZero.IsChecked == true)
+            {
                 commandToSend[0] |= (byte)(1 << 1);
+            }
+
             if (rbStatusNet.IsChecked == true)
+            {
                 commandToSend[0] |= (byte)(1 << 0);
+            }
 
             var binary = Convert.ToString(commandToSend[0], 2);
             textToShow = string.Format("0b{0} {1,6:D6}", binary.PadLeft(8, '0'), (int)sPeso.Value);

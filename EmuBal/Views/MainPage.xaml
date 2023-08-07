@@ -32,7 +32,7 @@
                             Style="{StaticResource DefaultComboBoxStyle}"
                             IsSynchronizedWithCurrentItem="False"
                             PlaceholderText="Seleccioná alguno chabón"
-                            SelectionChanged="cbPorts_SelectionChanged"
+                            SelectionChanged="CBPortsSelectionChanged"
                             Width="250">
                         </ComboBox>
                     </StackPanel>
@@ -47,7 +47,7 @@
                             Style="{StaticResource DefaultComboBoxStyle}"
                             IsSynchronizedWithCurrentItem="False"
                             PlaceholderText="Seleccioná alguno chabón"
-                            SelectionChanged="cbPorts_SelectionChanged"
+                            SelectionChanged="CBPortsSelectionChanged"
                             SelectedIndex="0"
                             Width="250">
                             <ComboBoxItem Content="1200"/>
@@ -76,7 +76,7 @@
                         HorizontalAlignment="Left"
                         Width="240"
                         StepFrequency="0.25"
-                        ValueChanged="sSampling_ValueChanged"
+                        ValueChanged="SSamplingValueChanged"
                         MaxWidth="300"/>
                     <TextBox
                         IsReadOnly="True"
@@ -99,12 +99,12 @@
                     <RadioButton
                         Name="rbAscii"
                         IsChecked="True"
-                        Checked="rbAscii_Checked"
+                        Checked="RBAsciiChecked"
                         Content="ASCII"
                         GroupName="StatusFormat"/>
                     <RadioButton
                         Name="rbBinary"
-                        Checked="rbBinary_Checked"
+                        Checked="RBBinaryChecked"
                         Content="Binario"
                         GroupName="StatusFormat"/>
                 </StackPanel>

@@ -25,10 +25,21 @@
     <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
     <AppxPackageDir>C:\Users\german\source\repos\EmuBal\AppPackages\</AppxPackageDir>
     <AppInstallerUri>https://gealtec.com/EmuBal</AppInstallerUri>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/germanfortiz/EmuBal</RepositoryUrl>
+    <NeutralLanguage>es-AR</NeutralLanguage>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
