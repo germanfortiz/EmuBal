@@ -3,7 +3,7 @@
 
 Este programa es una Aplicación Win UI 3 (windows 10 1809 en adelante) que emula el comportamiento de una balanza comercial.
 
-[<img src="EmuBal.png">](https://geltec.com.com/EmuBal),
+[<img src="EmuBal.png">](https://geltec.com.com/EmuBal)
 
 Cuando se ejecuta la misma, se debe seleccionar el puerto serie y la frecuencia de envío de información, es decir, la cantidad de veces por segundo que se envía la linea de texto con el peso simulado del vehículo, junto con los flags de estado seleccionados.
 
