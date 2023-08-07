@@ -1,11 +1,11 @@
 # EmuBal
 ### Emulador de Balanza por puerto Serie para mi Amigo el Ale.
 
-Este programa es una Aplicación Win UI 3 (windows 10 1809 en adelante) que emula el comportamiento de una balanza comercial, enviando por el puerto serie un string similar al que enviaría una balanza comercial.
+Este programa es una Aplicación Win UI 3 (windows 10 1809 en adelante) que emula el comportamiento de una balanza comercial.
 
 [<img src="EmuBal.png">](https://geltec.com.com/EmuBal),
 
-Cuando se ejecuta la misma, se debe seleccionar el puerto serie y la frecuencia de envío de información, es decir, la cantidad de veces por segundo que se envía la linea de texto con el  peso simulado del vehícul, junto con los flags de estado seleccionados.
+Cuando se ejecuta la misma, se debe seleccionar el puerto serie y la frecuencia de envío de información, es decir, la cantidad de veces por segundo que se envía la linea de texto con el peso simulado del vehículo, junto con los flags de estado seleccionados.
 
 ### Las especificaciones de lo que manda la balanza.
 
